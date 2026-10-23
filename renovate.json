@@ -1,0 +1,177 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "minimumReleaseAge": "14 days",
+  "minimumReleaseAgeBehaviour": "timestamp-required",
+  "internalChecksFilter": "strict",
+  "nix": {
+    "enabled": true
+  },
+  "postUpdateOptions": [
+    "gomodTidy"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^flake\\.nix$/"
+      ],
+      "matchStrings": [
+        "nixpkgs\\.url\\s*=\\s*\"github:NixOS/nixpkgs/(?<currentDigest>[a-f0-9]{40})\";"
+      ],
+      "depNameTemplate": "nixpkgs-package-set",
+      "packageNameTemplate": "NixOS/nixpkgs",
+      "datasourceTemplate": "github-digest",
+      "currentValueTemplate": "nixos-unstable",
+      "versioningTemplate": "exact"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^flake\\.nix$/"
+      ],
+      "matchStrings": [
+        "nixpkgs\\-intel\\.url\\s*=\\s*\"github:NixOS/nixpkgs/(?<currentDigest>[a-f0-9]{40})\";"
+      ],
+      "depNameTemplate": "nixpkgs-intel-package-set",
+      "packageNameTemplate": "NixOS/nixpkgs",
+      "datasourceTemplate": "github-digest",
+      "currentValueTemplate": "nixos-26.05",
+      "versioningTemplate": "exact"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^flake\\.nix$/"
+      ],
+      "matchStrings": [
+        "go-source\\.url\\s*=\\s*\"file\\+https://go\\.dev/dl/go(?<currentValue>\\d+\\.\\d+\\.\\d+)\\.src\\.tar\\.gz\";"
+      ],
+      "datasourceTemplate": "golang-version",
+      "depNameTemplate": "demo-go",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^renovate\\.json$/"
+      ],
+      "matchStrings": [
+        "\"nix\":\\s*\"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
+      ],
+      "depNameTemplate": "containerbase/nix-prebuild",
+      "datasourceTemplate": "github-releases"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "The dated package-set managers own these input revisions.",
+      "matchManagers": [
+        "nix"
+      ],
+      "matchPackageNames": [
+        "https://github.com/NixOS/nixpkgs"
+      ],
+      "enabled": false
+    },
+    {
+      "matchManagers": [
+        "custom.regex"
+      ],
+      "matchFileNames": [
+        "flake.nix"
+      ],
+      "matchPackageNames": [
+        "NixOS/nixpkgs",
+        "demo-go"
+      ],
+      "autoReplaceGlobalMatch": true,
+      "constraints": {
+        "nix": "2.35.2"
+      },
+      "postUpgradeTasks": {
+        "commands": [
+          "nix --extra-experimental-features 'nix-command flakes' flake lock"
+        ],
+        "fileFilters": [
+          "flake.lock"
+        ],
+        "executionMode": "update",
+        "installTools": {
+          "nix": {}
+        }
+      }
+    },
+    {
+      "matchManagers": [
+        "gomod",
+        "custom.regex"
+      ],
+      "matchPackageNames": [
+        "go",
+        "demo-go"
+      ],
+      "allowedVersions": ">=1.26.10 <1.27.0",
+      "rangeStrategy": "bump",
+      "groupName": "Go compiler"
+    },
+    {
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchPackageNames": [
+        "docker.io/library/golang",
+        "golang"
+      ],
+      "allowedVersions": "/^1\\.26\\.\\d+-alpine$/",
+      "groupName": "Go compiler"
+    },
+    {
+      "matchManagers": [
+        "custom.regex"
+      ],
+      "matchPackageNames": [
+        "NixOS/nixpkgs"
+      ],
+      "groupName": "Nix package sets"
+    },
+    {
+      "description": "The approved crypto/x509 security release is the only compiler age exception.",
+      "matchManagers": [
+        "gomod",
+        "custom.regex"
+      ],
+      "matchDatasources": [
+        "golang-version"
+      ],
+      "matchPackageNames": [
+        "go",
+        "demo-go"
+      ],
+      "matchJsonata": [
+        "version = '1.26.10'"
+      ],
+      "minimumReleaseAge": "0 days"
+    },
+    {
+      "description": "Keep the official maintained runtime and refuse undated ordinary digest updates.",
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchPackageNames": [
+        "gcr.io/distroless/static-debian13"
+      ],
+      "allowedVersions": "/^nonroot$/",
+      "minimumReleaseAge": "14 days",
+      "minimumReleaseAgeBehaviour": "timestamp-required",
+      "internalChecksFilter": "strict"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "minimumReleaseAge": "14 days",
+    "minimumReleaseAgeBehaviour": "timestamp-required",
+    "internalChecksFilter": "strict"
+  }
+}

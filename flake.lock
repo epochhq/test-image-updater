@@ -1,0 +1,57 @@
+{
+  "nodes": {
+    "go-source": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-ZN3UQ4tKmpEiypehABbX6LU/03raB9brpjzoBHFYw9Q=",
+        "type": "file",
+        "url": "https://go.dev/dl/go1.26.10.src.tar.gz"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://go.dev/dl/go1.26.10.src.tar.gz"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1791417561,
+        "narHash": "sha256-hyG/v6+58jS6nnJdKEMkhfSM+FhDe8cUo9oMAE5evCw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1e8a2e6b08f0940fc0d94aeff0e3e940ee86b632",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1e8a2e6b08f0940fc0d94aeff0e3e940ee86b632",
+        "type": "github"
+      }
+    },
+    "nixpkgs-intel": {
+      "locked": {
+        "lastModified": 1778443072,
+        "narHash": "sha256-zi7/fsqM/kFdNuED//4WOCUtezGtKKqRNORjMvfwjnA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "da5ad661ba4e5ef59ba743f0d112cbc30e474f32",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "da5ad661ba4e5ef59ba743f0d112cbc30e474f32",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "go-source": "go-source",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-intel": "nixpkgs-intel"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
