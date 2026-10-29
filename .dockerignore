@@ -3,8 +3,8 @@
 STATUS.md
 .direnv
 secrets
-.env*
-*.env
+**/.env*
+**/*.env
 tools
 devtools
 server
