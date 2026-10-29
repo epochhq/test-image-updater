@@ -2,11 +2,12 @@
   description = "test-image-updater Go toolchain";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/1e8a2e6b08f0940fc0d94aeff0e3e940ee86b632";
+    nixpkgs-go.url = "github:NixOS/nixpkgs/be147c05f4a91a83e254e9ce5d7f0421f99fca5c";
     nixpkgs-intel.url = "github:NixOS/nixpkgs/da5ad661ba4e5ef59ba743f0d112cbc30e474f32";
-    go-source.url = "file+https://go.dev/dl/go1.26.10.src.tar.gz";
+    go-source.url = "file+https://go.dev/dl/go1.27.3.src.tar.gz";
     go-source.flake = false;
   };
-  outputs = inputs@{ nixpkgs, nixpkgs-intel, ... }:
+  outputs = inputs@{ nixpkgs, nixpkgs-intel, nixpkgs-go, ... }:
     let
       lock = builtins.fromJSON (builtins.readFile ./flake.lock);
       source = lock.nodes.${lock.nodes.root.inputs.go-source};
@@ -16,12 +17,14 @@
       packages = forSystems (system:
         let
           pkgs = import (if system == "x86_64-darwin" then nixpkgs-intel else nixpkgs) { inherit system; };
-          go = (pkgs.callPackage (nixpkgs + "/pkgs/development/compilers/go/1.26.nix") {
-            buildGo126Module = pkgs.buildGoModule.override { inherit go; };
-          }).overrideAttrs (_: {
-            inherit version;
-            src = builtins.path { path = inputs.go-source.outPath; name = "go${version}.src.tar.gz"; };
-          });
+          selectedGo = if system == "x86_64-darwin"
+            then pkgs.callPackage (nixpkgs-go + "/pkgs/development/compilers/go/1.27.nix") {
+              buildGo127Module = pkgs.buildGoModule.override { go = selectedGo; };
+            }
+            else (import nixpkgs-go { inherit system; }).go_1_27;
+          go = assert selectedGo.version == version;
+            assert selectedGo.src.url == source.locked.url;
+            selectedGo;
         in { inherit go pkgs; }
       );
     in assert source.locked.url == source.original.url;

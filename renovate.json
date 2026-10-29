@@ -33,6 +33,20 @@
         "/^flake\\.nix$/"
       ],
       "matchStrings": [
+        "nixpkgs-go\\.url\\s*=\\s*\"github:NixOS/nixpkgs/(?<currentDigest>[a-f0-9]{40})\";"
+      ],
+      "depNameTemplate": "nixpkgs-go-package-set",
+      "packageNameTemplate": "NixOS/nixpkgs",
+      "datasourceTemplate": "github-digest",
+      "currentValueTemplate": "nixos-unstable",
+      "versioningTemplate": "exact"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^flake\\.nix$/"
+      ],
+      "matchStrings": [
         "nixpkgs\\-intel\\.url\\s*=\\s*\"github:NixOS/nixpkgs/(?<currentDigest>[a-f0-9]{40})\";"
       ],
       "depNameTemplate": "nixpkgs-intel-package-set",
@@ -113,7 +127,7 @@
         "go",
         "demo-go"
       ],
-      "allowedVersions": ">=1.26.10 <1.27.0",
+      "allowedVersions": ">=1.27.3 <1.28.0",
       "rangeStrategy": "bump",
       "groupName": "Go compiler"
     },
@@ -125,7 +139,7 @@
         "docker.io/library/golang",
         "golang"
       ],
-      "allowedVersions": "/^1\\.26\\.\\d+-alpine$/",
+      "allowedVersions": "/^1\\.27\\.\\d+-alpine$/",
       "groupName": "Go compiler"
     },
     {
@@ -151,7 +165,7 @@
         "demo-go"
       ],
       "matchJsonata": [
-        "version = '1.26.10'"
+        "version = '1.27.3'"
       ],
       "minimumReleaseAge": "0 days"
     },
@@ -167,6 +181,15 @@
       "minimumReleaseAge": "14 days",
       "minimumReleaseAgeBehaviour": "timestamp-required",
       "internalChecksFilter": "strict"
+    },
+    {
+      "matchManagers": [
+        "custom.regex"
+      ],
+      "matchDepNames": [
+        "nixpkgs-go-package-set"
+      ],
+      "groupName": "Go compiler"
     }
   ],
   "vulnerabilityAlerts": {

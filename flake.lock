@@ -3,13 +3,13 @@
     "go-source": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-ZN3UQ4tKmpEiypehABbX6LU/03raB9brpjzoBHFYw9Q=",
+        "narHash": "sha256-9drC0yShKLk1LP1AVYEIbaT2/UAFSGdUWlQmTsuTOD4=",
         "type": "file",
-        "url": "https://go.dev/dl/go1.26.10.src.tar.gz"
+        "url": "https://go.dev/dl/go1.27.3.src.tar.gz"
       },
       "original": {
         "type": "file",
-        "url": "https://go.dev/dl/go1.26.10.src.tar.gz"
+        "url": "https://go.dev/dl/go1.27.3.src.tar.gz"
       }
     },
     "nixpkgs": {
@@ -25,6 +25,22 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "1e8a2e6b08f0940fc0d94aeff0e3e940ee86b632",
+        "type": "github"
+      }
+    },
+    "nixpkgs-go": {
+      "locked": {
+        "lastModified": 1792517021,
+        "narHash": "sha256-GYg9NwhtA0mzCS6vsPs5WP82xjZkellvQeIq+80IQ0E=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "be147c05f4a91a83e254e9ce5d7f0421f99fca5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "be147c05f4a91a83e254e9ce5d7f0421f99fca5c",
         "type": "github"
       }
     },
@@ -48,6 +64,7 @@
       "inputs": {
         "go-source": "go-source",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-go": "nixpkgs-go",
         "nixpkgs-intel": "nixpkgs-intel"
       }
     }

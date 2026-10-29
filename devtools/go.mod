@@ -1,6 +1,6 @@
 module github.com/EpochBoy/test-image-updater/devtools
 
-go 1.26.10
+go 1.27.3
 
 tool (
 	github.com/fzipp/gocyclo/cmd/gocyclo
@@ -17,5 +17,5 @@ require (
 	golang.org/x/sync v0.24.0 // indirect
 	golang.org/x/sys v0.49.0 // indirect
 	golang.org/x/tools v0.51.0 // indirect
-	honnef.co/go/tools v0.8.1 // indirect
+	honnef.co/go/tools v0.8.2 // indirect
 )

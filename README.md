@@ -26,7 +26,7 @@ go mod download
 go -C devtools mod download
 ```
 
-The isolated devtools module pins Staticcheck and gocyclo. It keeps checker dependencies out of the application's module graph. The selected supported compiler includes the [crypto/x509 fix](https://pkg.go.dev/vuln/GO-2026-6809). This compiler pairs with the eligible analyzer; the next pairing trigger is recorded in tasks/follow-ups.md.
+The isolated devtools module pins Staticcheck and gocyclo. It keeps checker dependencies out of the application's module graph. The selected supported compiler includes the [crypto/x509 fix](https://pkg.go.dev/vuln/GO-2026-6809). Staticcheck 2026.2.2 supports the compiler's [current export-data format](https://github.com/dominikh/go-tools/releases/tag/2026.2.2).
 
 ## Checks
 
@@ -65,7 +65,7 @@ The dependency target prepares an image containing the verified modules. The off
 
 ## Dependency updates
 
-Renovate requires 14-day published timestamps for normal updates and vulnerability alerts. The exact Go 1.26.10 crypto/x509 release is the sole compiler age exception. Go module versions, compiler source and builder image update as a group. Supported-family constraints retain the compatible Go 1.26 line until the paired compiler/analyzer change is qualified. Native Nix lock regeneration owns archive hashes. Package-set revisions use the maintained GitHub digest datasource's commit timestamps. The Renovate operator must support native postUpgradeTasks.installTools and allow exactly `nix --extra-experimental-features 'nix-command flakes' flake lock`.
+Renovate requires 14-day published timestamps for normal updates and vulnerability alerts. The exact Go 1.27.3 crypto/x509 release is the sole compiler age exception. Go module versions, compiler source, compiler recipe input and builder image update as a group within the supported Go 1.27 line. Native Nix lock regeneration owns archive hashes. Package-set revisions use the maintained GitHub digest datasource's commit timestamps. The Renovate operator must support native postUpgradeTasks.installTools and allow exactly `nix --extra-experimental-features 'nix-command flakes' flake lock`.
 
 The runtime retains official Distroless nonroot behavior on the currently maintained Debian 13 family. The pinned digest includes the [upstream CA remediation](https://github.com/GoogleContainerTools/distroless/commit/73f4b38fb74c96475f47f56eb81ad267246939f4), backed by Debian's ca-certificates security package.
 
