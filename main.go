@@ -61,14 +61,14 @@ type VersionResponse struct {
 }
 
 type PageData struct {
-	Version       string
-	Commit        string
-	BuildTime     string
-	Hostname      string
-	Environment   string
-	Timestamp     string
-	RybbitSiteID  string
-	RybbitHost    string
+	Version      string
+	Commit       string
+	BuildTime    string
+	Hostname     string
+	Environment  string
+	Timestamp    string
+	RybbitSiteID string
+	RybbitHost   string
 }
 
 // statusRecorder wraps http.ResponseWriter to capture the status code

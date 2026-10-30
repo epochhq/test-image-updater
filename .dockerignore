@@ -1,0 +1,10 @@
+.git
+.github
+STATUS.md
+.direnv
+secrets
+**/.env*
+**/*.env
+tools
+devtools
+server
