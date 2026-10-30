@@ -103,7 +103,7 @@
       ],
       "autoReplaceGlobalMatch": true,
       "constraints": {
-        "nix": "2.35.2"
+        "nix": "2.35.3"
       },
       "postUpgradeTasks": {
         "commands": [
