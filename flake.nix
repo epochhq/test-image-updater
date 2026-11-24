@@ -4,7 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/1e8a2e6b08f0940fc0d94aeff0e3e940ee86b632";
     nixpkgs-go.url = "github:NixOS/nixpkgs/be147c05f4a91a83e254e9ce5d7f0421f99fca5c";
     nixpkgs-intel.url = "github:NixOS/nixpkgs/da5ad661ba4e5ef59ba743f0d112cbc30e474f32";
-    go-source.url = "file+https://go.dev/dl/go1.27.3.src.tar.gz";
+    go-source.url = "file+https://go.dev/dl/go1.27.4.src.tar.gz";
     go-source.flake = false;
   };
   outputs = inputs@{ nixpkgs, nixpkgs-intel, nixpkgs-go, ... }:

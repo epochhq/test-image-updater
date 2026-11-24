@@ -3,13 +3,13 @@
     "go-source": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-9drC0yShKLk1LP1AVYEIbaT2/UAFSGdUWlQmTsuTOD4=",
+        "narHash": "sha256-JUD0z2uhIUPd4343152eQ+wYxxU0arGd7P1KmQlp13s=",
         "type": "file",
-        "url": "https://go.dev/dl/go1.27.3.src.tar.gz"
+        "url": "https://go.dev/dl/go1.27.4.src.tar.gz"
       },
       "original": {
         "type": "file",
-        "url": "https://go.dev/dl/go1.27.3.src.tar.gz"
+        "url": "https://go.dev/dl/go1.27.4.src.tar.gz"
       }
     },
     "nixpkgs": {
